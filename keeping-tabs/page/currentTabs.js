@@ -7,29 +7,31 @@ Vue.component("v-title", {
   }
 });
 
-Vue.component("v-table", {
-  template: "<b-table :data='data' :columns='columns'></b-table>",
+Vue.component("v-list", {
+  template: `
+    <ul>
+      <li v-for="item in items">
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-32x32">
+              <img :src=item.favicon>
+            </p>
+          </figure>
+          <div class="media-content">
+            <p class="titles">{{ item.title }}</p>
+            <p class="urls" :href=item.url>{{ item.url }}</p>
+          </div>
+        </article>
+      </li>
+    </ul>
+  `,
   data: function() {
     return {
-      data: [],
-      columns: [
-        {
-          field: "favicon",
-          label: "Favicon"
-        },
-        {
-          field: "title",
-          label: "Title"
-        },
-        {
-          field: "url",
-          label: "URL"
-        }
-      ]
+      items: [],
     };
   },
   created: function() {
-    let vue = this;
+    var vue = this;
     vue.updateData();
     browser.tabs.onUpdated.addListener(function() {
       vue.updateData();
@@ -40,7 +42,7 @@ Vue.component("v-table", {
   },
   methods: {
     updateData() {
-      let vue = this;
+      var vue = this;
       browser.tabs.query({
         currentWindow: true
       }).then(function(tabs) {
@@ -48,12 +50,12 @@ Vue.component("v-table", {
           !tab.url.startsWith("moz-extension:"));
         var tabList = openTabs.map(function(tab) {
           return {
-            "favicon": `<img src="${tab.favIconUrl}">`,
-            "title": tab.title,
-            "url": tab.url
+            favicon: tab.favIconUrl,
+            title: tab.title,
+            url: tab.url
           };
         });
-        vue.data = tabList;
+        vue.items = tabList;
       });
     }
   }

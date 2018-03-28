@@ -1,8 +1,45 @@
+/* General */
+
 .section {
   height: 100vh;
   background: #2d2d2d;
 }
 
-.title {
+.column {
+  min-width: 600px;
+}
+
+.title, .titles {
   color: #fbfbfb;
+}
+
+/* Current Tabs */
+
+.media-left {
+  margin-right: 10px;
+}
+
+.icons {
+  width: 20px;
+}
+
+.media-content {
+  height: 45px;
+}
+
+.titles, .urls {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.titles {
+  font-size: 0.8rem;
+  margin-bottom: 0px !important;
+}
+
+.urls {
+  color: #adadad;
+  font-size: 0.6rem;
+  margin-top: -2px;
 }
