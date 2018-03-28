@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <title>Keeping Tabs</title>
   <link rel="icon" type="image/png" href="../icons/keeping-tabs-16.png" sizes="16x16">
@@ -12,15 +13,33 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/buefy@0.6.4/lib/buefy.min.css">
   <!-- Manager CSS -->
   <link rel="stylesheet" type="text/css" href="manager.css">
+
 </head>
 <body>
 
-  <div id="app">
-      <p>{{ message }}</p>
-  </div>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <div id="current-tabs">
+            <v-title></v-title>
+            <v-table></v-table>
+          </div>
+        </div>
+        <div class="column">
+          <div id="saved-tabs">
+            <v-title></v-title>
+            <v-table></v-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Manager JS -->
-  <script type="text/javascript" src="manager.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="currentTabs.js"></script>
+  <script type="text/javascript" src="savedTabs.js"></script>
 
 </body>
 </html>
