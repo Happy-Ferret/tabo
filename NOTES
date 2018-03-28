@@ -1,0 +1,1 @@
+web-ext run --no-reload --source-dir keeping-tabs
