@@ -9,7 +9,7 @@ Vue.component("v-title", {
 
 Vue.component("v-list", {
   template: `
-    <ul>
+    <ul id="current-tab-content">
       <li v-for="item in items">
         <article class="media">
           <figure class="media-left">
