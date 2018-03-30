@@ -5,10 +5,12 @@
   <meta charset="UTF-8">
   <title>Keeping Tabs</title>
   <link rel="icon" type="image/png" href="../icons/keeping-tabs-16.png" sizes="16x16">
-  <!-- Vue JS -->
+  <!-- Vue -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
-  <!-- Bulma CSS -->
+  <!-- Bulma -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.6.2/css/bulma.css">
+  <!-- Font Awesome -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
   <!-- Manager CSS -->
   <link rel="stylesheet" type="text/css" href="manager.css">
 
@@ -18,8 +20,8 @@
   <section class="section">
     <div class="container">
       <div class="columns">
-        <div class="column">
-          <div id="current-tabs">
+        <div class="column is-one-third">
+         <div id="current-tabs">
             <h1
               class="title is-4"
               :count=count
@@ -36,8 +38,16 @@
           </div>
         </div>
         <div class="column">
-          <div id="saved-tabs">
-            <v-title></v-title>
+          <div>
+            <h1 class="title is-4">Actions</h1>
+            <div class="actions">
+              <i class="fas fa-save fa-fw"></i>
+              <p>Save current tabs</p>
+            </div>
+            <div class="actions disabled">
+              <i class="fas fa-folder-open fa-fw"></i>
+              <p>Load saved tabs</p>
+            </div>
           </div>
         </div>
       </div>

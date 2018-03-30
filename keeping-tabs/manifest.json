@@ -30,6 +30,6 @@
     }
   },
 
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net/; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net/ https://use.fontawesome.com/; object-src 'self'"
 
 }
