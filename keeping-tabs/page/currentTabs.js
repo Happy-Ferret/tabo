@@ -1,52 +1,47 @@
-Vue.component("v-title", {
-  template: "<h1 class='title is-4'>{{ title }}</h1>",
-  data: function() {
-    return {
-      title: "Current Tabs"
-    };
-  }
+Vue.component("tab-list", {
+  template: `
+    <li>
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-32x32">
+            <img :src=favicon>
+          </p>
+        </figure>
+        <div class="media-content">
+          <p class="titles">{{ title }}</p>
+          <p class="urls" :href=url>{{ url }}</p>
+        </div>
+      </article>
+    </li>
+  `,
+  props: ["favicon", "title", "url"]
 });
 
-Vue.component("v-list", {
-  template: `
-    <ul id="current-tab-content">
-      <li v-for="item in items">
-        <article class="media">
-          <figure class="media-left">
-            <p class="image is-32x32">
-              <img :src=item.favicon>
-            </p>
-          </figure>
-          <div class="media-content">
-            <p class="titles">{{ item.title }}</p>
-            <p class="urls" :href=item.url>{{ item.url }}</p>
-          </div>
-        </article>
-      </li>
-    </ul>
-  `,
+new Vue({
+  el: "#current-tabs",
   data: function() {
     return {
-      items: [],
+      count: 0,
+      items: []
     };
   },
   created: function() {
     var vue = this;
-    vue.updateData();
+    vue.updateItems();
     browser.tabs.onUpdated.addListener(function() {
-      vue.updateData();
+      vue.updateItems();
     });
     browser.tabs.onRemoved.addListener(function() {
-      setTimeout(vue.updateData, 500);
+      setTimeout(vue.updateItems, 500);
     });
   },
   methods: {
-    updateData() {
+    updateItems() {
       var vue = this;
       browser.tabs.query({
         currentWindow: true
       }).then(function(tabs) {
-        var openTabs = tabs.filter(tab => !tab.url.startsWith("about:") && 
+        var openTabs = tabs.filter(tab => !tab.url.startsWith("about:") &&
           !tab.url.startsWith("moz-extension:"));
         var tabList = openTabs.map(function(tab) {
           return {
@@ -56,9 +51,8 @@ Vue.component("v-list", {
           };
         });
         vue.items = tabList;
+        vue.count = tabList.length;
       });
     }
   }
 });
-
-new Vue({el: "#current-tabs"});

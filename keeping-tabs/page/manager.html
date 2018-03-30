@@ -20,8 +20,19 @@
       <div class="columns">
         <div class="column">
           <div id="current-tabs">
-            <v-title></v-title>
-            <v-list></v-list>
+            <h1
+              class="title is-4"
+              :count=count
+            >Current Tabs ({{ count }})</h1>
+            <ul id="current-tab-content">
+              <li
+                is="tab-list"
+                v-for="item in items"
+                v-bind:favicon="item.favicon"
+                v-bind:title="item.title"
+                v-bind:url="item.url"
+              ></li>
+            </ul>
           </div>
         </div>
         <div class="column">
