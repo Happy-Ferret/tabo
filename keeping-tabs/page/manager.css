@@ -7,12 +7,25 @@
   color: #fbfbfb;
 }
 
+li {
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
 .medium-font {
   font-size: 0.8rem;
 }
 
 .small-font {
-  font-size: 0.6rem;
+  font-size: 0.65rem;
+}
+
+.primary-color {
+  color: #fbfbfb;
+}
+
+.secondary-color {
+  color: #8f8f8f;
 }
 
 /* Current Tabs */
@@ -22,59 +35,47 @@
   overflow: scroll;
 }
 
-.title {
-  color: #fbfbfb;
-}
-
 .media-left {
   margin-right: 10px;
 }
 
-.icons {
-  width: 20px;
+a {
+  display: inherit;
+}
+a:hover {
+  color: #fbfbfb;
+  text-decoration: underline;
 }
 
 .media-content {
-  height: 45px;
-}
-
-.titles, .urls {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.titles {
-  margin-bottom: 0px !important;
-}
-
-.urls {
-  color: #8f8f8f;
-  margin-top: -2px;
+  overflow: initial;
 }
 
 /* Saved Sessions */
 
+.names {
+  margin-bottom: 3px;
+  font-weight: bold;
+}
 
 /* Actions */
 
 .actions {
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .actions > p {
   cursor: pointer;
 }
 .actions > p:hover {
-  font-weight: bold;
+  text-decoration: underline;
 }
-
-/* .disabled { */
-/*   cursor: default; */
-/*   color: #8f8f8f; */
-/* } */
 
 .actions > p {
   display: inline;
   margin-left: 3px;
+}
+
+hr {
+  margin: 15px 0;
 }

@@ -3,13 +3,16 @@ Vue.component("current-list", {
     <li>
       <article class="media">
         <figure class="media-left">
-          <p class="image is-32x32">
+          <p class="image is-16x16">
             <img :src=favicon>
           </p>
         </figure>
         <div class="media-content">
-          <p class="titles medium-font">{{ title }}</p>
-          <p class="urls small-font" :href=url>{{ url }}</p>
+          <a
+            :href=url
+            target="_blank"
+            class="medium-font primary-color"
+          >{{ title }}</a>
         </div>
       </article>
     </li>
@@ -17,26 +20,42 @@ Vue.component("current-list", {
   props: ["favicon", "title", "url"]
 });
 
+Vue.component("saved-list", {
+  template: `
+    <li>
+      <p class="names medium-font">{{ name }}</p>
+      <p class="small-font secondary-color">
+        <span class="primary-color">{{ count }} tabs</span>
+        @ {{ date }} {{ time }}
+      </p>
+    </li>
+  `,
+  props: ["date", "count", "time", "name"]
+});
+
 new Vue({
   el: "#vue-app",
   data: function() {
     return {
-      currentCount: 0,
-      currentItems: []
+      currentItems: [],
+      savedItems: [
+        {date: "2018/04/02", time: "10:57 AM", name: "Apple Pie", count: "2"},
+        {date: "2018/04/02", time: "10:57 AM", name: "Apple Pie", count: "2"},
+      ]
     };
   },
   created: function() {
     var vue = this;
-    vue.updateItems();
+    vue.updateCurrentItems();
     browser.tabs.onUpdated.addListener(function() {
-      vue.updateItems();
+      vue.updateCurrentItems();
     });
     browser.tabs.onRemoved.addListener(function() {
-      setTimeout(vue.updateItems, 500);
+      setTimeout(vue.updateCurrentItems, 500);
     });
   },
   methods: {
-    updateItems() {
+    updateCurrentItems() {
       var vue = this;
       browser.tabs.query({
         currentWindow: true
@@ -51,7 +70,6 @@ new Vue({
           };
         });
         vue.currentItems = tabList;
-        vue.currentCount = tabList.length;
       });
     },
     greet() {

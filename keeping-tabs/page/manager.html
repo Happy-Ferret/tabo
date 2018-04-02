@@ -23,10 +23,9 @@
         <div class="column is-one-third">
          <div>
             <h1
-              class="title is-4"
-              :currentCount=currentCount
-            >Current Tabs ({{ currentCount }})</h1>
-            <ul id="current-list" v-if="currentCount != 0">
+              class="title is-4 primary-color"
+            >Current Tabs ({{ currentItems.length }})</h1>
+            <ul id="current-list" v-if="currentItems.length != 0">
               <li
                 is="current-list"
                 v-for="item in currentItems"
@@ -37,37 +36,40 @@
             </ul>
             <p
               class="medium-font"
-              v-if="currentCount == 0"
+              v-if="currentItems.length == 0"
             >Nothing to see here</p>
           </div>
         </div>
         <div class="column">
             <h1
-              class="title is-4"
-            >Saved Sessions</h1>
-            <!-- <ul id="saved-list" v-if="currentCount != 0"> -->
-            <!--   <li -->
-            <!--     is="saved-list" -->
-            <!--     v-for="item in items" -->
-            <!--     v-bind:favicon="item.favicon" -->
-            <!--     v-bind:title="item.title" -->
-            <!--     v-bind:url="item.url" -->
-            <!--   ></li> -->
-            <!-- </ul> -->
+             class="title is-4 primary-color"
+           >Saved Sessions ({{ savedItems.length }})</h1>
+            <ul id="saved-list">
+              <li
+                is="saved-list"
+                v-for="item in savedItems"
+                v-bind:name="item.name"
+                v-bind:count="item.count"
+                v-bind:date="item.date"
+                v-bind:time="item.time"
+              ></li>
+            </ul>
         </div>
         <div class="column">
           <div>
-            <h1 class="title is-4">Actions</h1>
-            <div class="actions medium-font">
-              <i class="fas fa-save fa-fw"></i>
-              <p
-               v-on:click="greet"
-              >Save current tabs</p>
-            </div>
-            <div class="actions medium-font">
-              <i class="fas fa-folder-open fa-fw"></i>
-              <p>Load saved tabs</p>
-            </div>
+            <h1 class="title is-4 primary-color">Actions</h1>
+            <ul>
+              <li class="actions medium-font">
+                <i class="fas fa-save fa-fw"></i>
+                <p
+                 v-on:click="greet"
+                >Save current tabs</p>
+              </li>
+              <li class="actions medium-font">
+                <i class="fas fa-folder-open fa-fw"></i>
+                <p>Load saved sessions</p>
+              </li>
+            </ul>
             <hr>
           </div>
         </div>
