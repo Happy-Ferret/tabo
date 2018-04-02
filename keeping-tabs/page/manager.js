@@ -11,7 +11,7 @@ Vue.component("current-list", {
           <a
             :href=url
             target="_blank"
-            class="medium-font primary-color clickable"
+            class="medium-font has-text-weight-light primary-color clickable"
           >{{ title }}</a>
         </div>
       </article>
@@ -23,9 +23,13 @@ Vue.component("current-list", {
 Vue.component("saved-list", {
   template: `
     <li>
-      <p class="names medium-font clickable">{{ name }}</p>
-      <p class="small-font secondary-color">
-        <span class="primary-color clickable">{{ count }} tabs</span>
+      <p class="names medium-font has-text-weight-semibold clickable">
+        {{ name }}
+      </p>
+      <p class="small-font has-text-weight-light secondary-color">
+        <span class="primary-color clickable">
+          {{ count }} tabs
+        </span>
         @ {{ date }} {{ time }}
       </p>
     </li>

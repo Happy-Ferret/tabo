@@ -20,6 +20,10 @@ li {
   margin-bottom: 12px;
 }
 
+span {
+  display: inline-block;
+}
+
 .actions > * {
   display: inline-block;
 }
@@ -38,9 +42,6 @@ li {
 }
 .actions li:last-child {
   margin-right: 0;
-}
-.actions p {
-  font-weight: bold;
 }
 
 .medium-font {
