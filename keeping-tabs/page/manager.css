@@ -7,9 +7,17 @@
   color: #fbfbfb;
 }
 
+.medium-font {
+  font-size: 0.8rem;
+}
+
+.small-font {
+  font-size: 0.6rem;
+}
+
 /* Current Tabs */
 
-#current-tab-content {
+#current-tab-list {
   max-height: 80vh;
   overflow: scroll;
 }
@@ -37,28 +45,31 @@
 }
 
 .titles {
-  font-size: 0.8rem;
   margin-bottom: 0px !important;
 }
 
 .urls {
   color: #8f8f8f;
-  font-size: 0.6rem;
   margin-top: -2px;
 }
 
 /* Actions */
 
 .actions {
-  font-size: 0.8rem;
-  margin-bottom: 3px;
-  cursor: pointer;
+  margin-bottom: 4px;
 }
 
-.disabled {
-  cursor: default;
-  color: #8f8f8f;
+.actions > p {
+  cursor: pointer;
 }
+.actions > p:hover {
+  font-weight: bold;
+}
+
+/* .disabled { */
+/*   cursor: default; */
+/*   color: #8f8f8f; */
+/* } */
 
 .actions > p {
   display: inline;

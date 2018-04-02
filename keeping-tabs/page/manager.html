@@ -19,14 +19,14 @@
 
   <section class="section">
     <div class="container">
-      <div class="columns">
+      <div class="columns" id="vue-app">
         <div class="column is-one-third">
-         <div id="current-tabs">
+         <div>
             <h1
               class="title is-4"
               :count=count
             >Current Tabs ({{ count }})</h1>
-            <ul id="current-tab-content">
+            <ul id="current-tab-list" v-if="count != 0">
               <li
                 is="tab-list"
                 v-for="item in items"
@@ -35,19 +35,31 @@
                 v-bind:url="item.url"
               ></li>
             </ul>
+            <p
+              class="medium-font"
+              v-if="count == 0"
+            >Nothing to see here</p>
           </div>
+        </div>
+        <div class="column">
+            <h1
+              class="title is-4"
+            >Saved Tabs</h1>
         </div>
         <div class="column">
           <div>
             <h1 class="title is-4">Actions</h1>
-            <div class="actions">
+            <div class="actions medium-font">
               <i class="fas fa-save fa-fw"></i>
-              <p>Save current tabs</p>
+              <p
+               v-on:click="greet"
+              >Save current tabs</p>
             </div>
-            <div class="actions disabled">
+            <div class="actions medium-font">
               <i class="fas fa-folder-open fa-fw"></i>
               <p>Load saved tabs</p>
             </div>
+            <hr>
           </div>
         </div>
       </div>

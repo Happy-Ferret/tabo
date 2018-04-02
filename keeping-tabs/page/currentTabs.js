@@ -8,8 +8,8 @@ Vue.component("tab-list", {
           </p>
         </figure>
         <div class="media-content">
-          <p class="titles">{{ title }}</p>
-          <p class="urls" :href=url>{{ url }}</p>
+          <p class="titles medium-font">{{ title }}</p>
+          <p class="urls small-font" :href=url>{{ url }}</p>
         </div>
       </article>
     </li>
@@ -18,7 +18,7 @@ Vue.component("tab-list", {
 });
 
 new Vue({
-  el: "#current-tabs",
+  el: "#vue-app",
   data: function() {
     return {
       count: 0,
@@ -53,6 +53,9 @@ new Vue({
         vue.items = tabList;
         vue.count = tabList.length;
       });
+    },
+    greet() {
+      alert("Hello!");
     }
   }
 });
