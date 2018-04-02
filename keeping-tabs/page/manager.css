@@ -7,6 +7,10 @@
   color: #fbfbfb;
 }
 
+h1 {
+  margin-bottom: 20px !important;
+}
+
 li {
   line-height: 1.2;
   margin-bottom: 15px;
