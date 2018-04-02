@@ -24,12 +24,12 @@
          <div>
             <h1
               class="title is-4"
-              :count=count
-            >Current Tabs ({{ count }})</h1>
-            <ul id="current-tab-list" v-if="count != 0">
+              :currentCount=currentCount
+            >Current Tabs ({{ currentCount }})</h1>
+            <ul id="current-list" v-if="currentCount != 0">
               <li
-                is="tab-list"
-                v-for="item in items"
+                is="current-list"
+                v-for="item in currentItems"
                 v-bind:favicon="item.favicon"
                 v-bind:title="item.title"
                 v-bind:url="item.url"
@@ -37,14 +37,23 @@
             </ul>
             <p
               class="medium-font"
-              v-if="count == 0"
+              v-if="currentCount == 0"
             >Nothing to see here</p>
           </div>
         </div>
         <div class="column">
             <h1
               class="title is-4"
-            >Saved Tabs</h1>
+            >Saved Sessions</h1>
+            <!-- <ul id="saved-list" v-if="currentCount != 0"> -->
+            <!--   <li -->
+            <!--     is="saved-list" -->
+            <!--     v-for="item in items" -->
+            <!--     v-bind:favicon="item.favicon" -->
+            <!--     v-bind:title="item.title" -->
+            <!--     v-bind:url="item.url" -->
+            <!--   ></li> -->
+            <!-- </ul> -->
         </div>
         <div class="column">
           <div>
@@ -67,8 +76,7 @@
   </section>
 
   <!-- Manager JS -->
-  <script type="text/javascript" src="currentTabs.js"></script>
-  <script type="text/javascript" src="savedTabs.js"></script>
+  <script type="text/javascript" src="manager.js"></script>
 
 </body>
 </html>

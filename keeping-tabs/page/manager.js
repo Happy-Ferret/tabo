@@ -1,4 +1,4 @@
-Vue.component("tab-list", {
+Vue.component("current-list", {
   template: `
     <li>
       <article class="media">
@@ -21,8 +21,8 @@ new Vue({
   el: "#vue-app",
   data: function() {
     return {
-      count: 0,
-      items: []
+      currentCount: 0,
+      currentItems: []
     };
   },
   created: function() {
@@ -50,8 +50,8 @@ new Vue({
             url: tab.url
           };
         });
-        vue.items = tabList;
-        vue.count = tabList.length;
+        vue.currentItems = tabList;
+        vue.currentCount = tabList.length;
       });
     },
     greet() {

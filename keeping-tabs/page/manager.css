@@ -17,7 +17,7 @@
 
 /* Current Tabs */
 
-#current-tab-list {
+#current-list {
   max-height: 80vh;
   overflow: scroll;
 }
@@ -52,6 +52,9 @@
   color: #8f8f8f;
   margin-top: -2px;
 }
+
+/* Saved Sessions */
+
 
 /* Actions */
 
