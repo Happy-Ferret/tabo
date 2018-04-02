@@ -11,7 +11,7 @@ Vue.component("current-list", {
           <a
             :href=url
             target="_blank"
-            class="medium-font primary-color"
+            class="medium-font primary-color hoverable"
           >{{ title }}</a>
         </div>
       </article>
@@ -23,9 +23,9 @@ Vue.component("current-list", {
 Vue.component("saved-list", {
   template: `
     <li>
-      <p class="names medium-font">{{ name }}</p>
+      <p class="names medium-font hoverable">{{ name }}</p>
       <p class="small-font secondary-color">
-        <span class="primary-color">{{ count }} tabs</span>
+        <span class="primary-color hoverable">{{ count }} tabs</span>
         @ {{ date }} {{ time }}
       </p>
     </li>

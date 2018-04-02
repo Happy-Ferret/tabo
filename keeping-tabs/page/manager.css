@@ -32,6 +32,13 @@ li {
   color: #8f8f8f;
 }
 
+.hoverable {
+  cursor: pointer;
+}
+.hoverable:hover {
+  text-decoration: underline;
+}
+
 /* Current Tabs */
 
 #current-list {
@@ -48,7 +55,6 @@ a {
 }
 a:hover {
   color: #fbfbfb;
-  text-decoration: underline;
 }
 
 .media-content {
@@ -66,13 +72,6 @@ a:hover {
 
 .actions {
   margin-bottom: 5px;
-}
-
-.actions > p {
-  cursor: pointer;
-}
-.actions > p:hover {
-  text-decoration: underline;
 }
 
 .actions > p {
