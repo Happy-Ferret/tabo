@@ -8,18 +8,44 @@
 }
 
 h1 {
-  margin-bottom: 20px !important;
+  margin-bottom: 0 !important;
+}
+
+hr {
+  margin: 15px 0;
 }
 
 li {
   line-height: 1.2;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+}
+
+.actions > * {
+  display: inline-block;
+}
+.actions {
+  position: relative;
+}
+.actions > ul {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.actions li {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-right: 8px;
+}
+.actions li:last-child {
+  margin-right: 0;
+}
+.actions p {
+  font-weight: bold;
 }
 
 .medium-font {
   font-size: 0.8rem;
 }
-
 .small-font {
   font-size: 0.65rem;
 }
@@ -27,16 +53,19 @@ li {
 .primary-color {
   color: #fbfbfb;
 }
-
 .secondary-color {
   color: #8f8f8f;
 }
 
-.hoverable {
+.clickable {
   cursor: pointer;
 }
-.hoverable:hover {
+.clickable:hover {
   text-decoration: underline;
+}
+.clickable:active {
+  color: #8f8f8f;
+  text-decoration: none;
 }
 
 /* Current Tabs */
@@ -66,19 +95,4 @@ a:hover {
 .names {
   margin-bottom: 3px;
   font-weight: bold;
-}
-
-/* Actions */
-
-.actions {
-  margin-bottom: 5px;
-}
-
-.actions > p {
-  display: inline;
-  margin-left: 3px;
-}
-
-hr {
-  margin: 15px 0;
 }

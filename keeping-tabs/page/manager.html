@@ -19,12 +19,18 @@
 
   <section class="section">
     <div class="container">
-      <div class="columns" id="vue-app">
-        <div class="column is-one-third">
-         <div>
-            <h1
-              class="title is-4 primary-color"
-            >Current Tabs ({{ currentItems.length }})</h1>
+      <div class="columns is-6 is-variable" id="vue-app">
+        <div class="column">
+          <div>
+            <div class="actions">
+              <h1 class="title is-4 primary-color">
+                Current Tabs ({{ currentItems.length }})
+              </h1>
+              <ul>
+                <li><p class="medium-font clickable">Save</p></li>
+              </ul>
+            </div>
+            <hr>
             <ul id="current-list" v-if="currentItems.length != 0">
               <li
                 is="current-list"
@@ -41,9 +47,16 @@
           </div>
         </div>
         <div class="column">
-            <h1
-             class="title is-4 primary-color"
-           >Saved Sessions ({{ savedItems.length }})</h1>
+            <div class="actions">
+              <h1 class="title is-4 primary-color" >
+                Saved Sessions ({{ savedItems.length }})
+              </h1>
+              <ul>
+                <li><p class="medium-font clickable">Edit</p></li>
+                <li><p class="medium-font clickable">Clear</p></li>
+              </ul>
+            </div>
+            <hr>
             <ul id="saved-list">
               <li
                 is="saved-list"
@@ -55,23 +68,28 @@
               ></li>
             </ul>
         </div>
-        <div class="column">
+        <div class="column is-one-quarter">
           <div>
-            <h1 class="title is-4 primary-color">Actions</h1>
-            <ul>
-              <li class="actions medium-font">
-                <i class="fas fa-save fa-fw"></i>
-                <p
-                  class="hoverable"
-                  v-on:click="greet"
-                >Save current tabs</p>
-              </li>
-              <li class="actions medium-font">
-                <i class="fas fa-folder-open fa-fw"></i>
-                <p class="hoverable">Load saved sessions</p>
-              </li>
-            </ul>
+            <div class="actions">
+              <h1 class="title is-4 primary-color">Settings</h1>
+              <ul>
+                <li><p class="medium-font clickable">About</p></li>
+              </ul>
+            </div>
             <hr>
+            <!-- <ul> -->
+            <!--   <li class="actions medium-font"> -->
+            <!--     <i class="fas fa-save fa-fw"></i> -->
+            <!--     <p -->
+            <!--       class="clickable" -->
+            <!--       v-on:click="greet" -->
+            <!--     >Save current tabs</p> -->
+            <!--   </li> -->
+            <!--   <li class="actions medium-font"> -->
+            <!--     <i class="fas fa-folder-open fa-fw"></i> -->
+            <!--     <p class="clickable">Load saved sessions</p> -->
+            <!--   </li> -->
+            <!-- </ul> -->
           </div>
         </div>
       </div>
