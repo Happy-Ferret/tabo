@@ -88,19 +88,23 @@ span {
   overflow: scroll;
 }
 
-.media-left {
+.currentTabs {
+  display: flex;
+  justify-content: flex-start;
+}
+
+img {
+  width: 18px;
+  height: 18px;
   margin-right: 10px;
 }
 
-a {
-  display: inherit;
-}
-a:hover {
-  color: #f1f1f1;
+.titles {
+  display: flex;
 }
 
-.media-content {
-  overflow: initial;
+a:hover {
+  color: #f1f1f1;
 }
 
 /* Saved Sessions */

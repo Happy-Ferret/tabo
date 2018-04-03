@@ -2,20 +2,16 @@
 Vue.component("current-list", {
   template: `
     <li>
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-16x16">
-            <img :src=favicon>
-          </p>
-        </figure>
-        <div class="media-content">
+      <div class="currentTabs">
+        <img :src=favicon>
+        <span class="titles">
           <a
             :href=url
             target="_blank"
             class="medium-font has-text-weight-normal primary-color clickable"
           >{{ title }}</a>
-        </div>
-      </article>
+        </span>
+      </div>
     </li>
   `,
   props: ["favicon", "title", "url"]
