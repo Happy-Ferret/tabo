@@ -35,7 +35,7 @@ Vue.component("saved-list", {
       <p
         v-if="remove"
         @click="$emit('remove-item')"
-        class="removes medium-font primary-color has-text-weight-light"
+        class="removes medium-font primary-color has-text-weight-normal"
       >x</p>
     </li>
   `,
@@ -64,6 +64,7 @@ new Vue({
       /* Current Tabs */
 
       currentItems: [],
+      text: "",
 
       /* Saved Sessions */
 
@@ -72,11 +73,7 @@ new Vue({
     };
   },
   created: function() {
-
     var vue = this;
-
-    /* Current Tabs */
-
     vue.updateCurrentItems();
     browser.tabs.onUpdated.addListener(function() {
       vue.updateCurrentItems();
@@ -84,7 +81,6 @@ new Vue({
     browser.tabs.onRemoved.addListener(function() {
       setTimeout(vue.updateCurrentItems, 500);
     });
-
   },
   computed: {
 
@@ -134,15 +130,38 @@ new Vue({
       });
     },
 
-    // Save tabs
-    saveCurrentItems() {
+    // Show input card for saving tabs
+    showSaveCard() {
+      element.saveAction.classList.add("active");
+      element.saveCard.classList.add("is-active");
+      element.saveInput.focus();
+      element.saveInput.value = "";
+    },
+
+    // Hide input card for saving tabs
+    hideSaveCard() {
+      element.saveAction.classList.remove("active");
+      element.saveCard.classList.remove("is-active");
+    },
+
+    // Handler function for input card submit
+    handleSaveCardSubmit() {
+      var name = this.$refs.nameInput.value;
+      if (name != "") {
+        this.saveCurrentItems(name);
+        this.hideSaveCard();
+      }
+    },
+
+    // Save tabs as session
+    saveCurrentItems(sessionName) {
       var vue = this;
       var items = vue.currentItems;
       if (items.length >= 1) {
         var session = {
           date: helper.getDateNow(),
           time: helper.getTimeNow(),
-          name: "Test",
+          name: sessionName,
           count: items.length,
           remove: false
         };
@@ -153,11 +172,10 @@ new Vue({
     /* Saved Sessions */
 
     // Handler function for remove action
-    removeActionHandler() {
+    handleRemoveAction() {
       this.toggleRemoveButtons();
       if (!this.savedActionClasses.endsWith("disabled")) {
-        var action = document.getElementById("remove-action");
-        action.classList.toggle("active");
+        element.removeAction.classList.toggle("active");
       }
     },
 
@@ -179,14 +197,22 @@ new Vue({
   }
 });
 
+// Elements
+var element = {
+  saveAction: document.getElementById("save-action"),
+  saveCard: document.getElementById("save-card"),
+  saveInput: document.getElementById("name-input"),
+  removeAction: document.getElementById("remove-action")
+};
+
 // Helper functions
 var helper = {
   getDateNow: function() {
     var today = new Date();
     var date = [
       today.getFullYear(),
-      today.getMinutes(),
-      today.getSeconds()
+      today.getMonth() + 1,
+      today.getDate()
     ].map(formatDigit);
     return date.join("/");
   },
