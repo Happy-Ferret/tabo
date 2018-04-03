@@ -39,8 +39,8 @@ Vue.component("saved-list", {
       <p
         v-if="remove"
         v-on:click="$emit('remove-item')"
-        class="removes medium-font primary-color has-text-weight-bold"
-      >X</p>
+        class="removes medium-font primary-color has-text-weight-light"
+      >x</p>
     </li>
   `,
   props: ["name", "count", "date", "time", "remove"]
@@ -54,7 +54,7 @@ new Vue({
       currentItems: [],
       savedItems: [
         {date: "2018/04/02", time: "10:57:34", name: "Apple Pie", count: "2", remove: false},
-        {date: "2018/04/02", time: "10:57:34", name: "Apple Pie", count: "4", remove: false},
+        {date: "2018/04/02", time: "10:57:34", name: "Apple Pie qwleqwle jlkqwe lwqkhel qwjkl eqjwlk ejqwlk ejwq wqlekjlkjlk qwe jqkwelqwje lkw", count: "4", remove: false},
       ],
     };
   },
