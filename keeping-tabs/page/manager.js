@@ -85,9 +85,13 @@ new Vue({
     window.addEventListener("keydown", function(event) {
       // Space
       if (event.keyCode == 32) {
-        vue.handleSaveAction();
+        if (!element.saveAction.classList.contains("active")) {
+          vue.handleSaveAction();
+        }
+      // Shift
       } else if (event.keyCode == 16) {
         vue.handleRemoveAction();
+      // Backspace
       } else if (event.keyCode == 8) {
         vue.clearSavedItems();
       }
@@ -152,7 +156,7 @@ new Vue({
 
     // Handler function for input card submit
     handleSaveCardSubmit() {
-      var name = this.$refs.nameInput.value;
+      var name = this.$refs.nameInput.value.trim();
       if (name != "") {
         this.saveCurrentItems(name);
         this.hideSaveCard();
