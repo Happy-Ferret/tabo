@@ -102,22 +102,20 @@ a:hover {
   position: relative;
 }
 
-.sessions, .icons {
+.sessions, .removes {
   display: inline-block;
 }
 
-.icons{
+.removes{
   position: absolute;
   top: 3px;
   right: 0;
   height: 100%;
   text-align: right;
-  color: #c91111;
-  font-size: 1.05rem;
+  cursor: pointer;
+  line-height: 1;
+  -moz-transform: scale(1, 0.9);
 }
-.icons:hover {
-  color: #ff0808;
-}
-.icons:active {
-  color: #fbfbfb;
+.removes:hover {
+  color: red;
 }

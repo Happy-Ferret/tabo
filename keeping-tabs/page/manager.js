@@ -36,10 +36,11 @@ Vue.component("saved-list", {
           @ {{ date }} {{ time }}
         </p>
       </div>
-      <i
+      <p
         v-if="remove"
         v-on:click="$emit('remove-item')"
-        class="icon ion-close-circled icons clickable"></i>
+        class="removes medium-font primary-color has-text-weight-bold"
+      >X</p>
     </li>
   `,
   props: ["name", "count", "date", "time", "remove"]
