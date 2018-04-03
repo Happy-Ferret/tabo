@@ -6,9 +6,11 @@
   <title>Keeping Tabs</title>
   <link rel="icon" type="image/png" href="../icons/keeping-tabs-16.png" sizes="16x16">
   <!-- Vue -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+  <script src="../library/vue.js"></script>
   <!-- Bulma -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.6.2/css/bulma.css">
+  <link rel="stylesheet" href="../library/bulma.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../library/ionicons.css">
   <!-- Manager CSS -->
   <link rel="stylesheet" type="text/css" href="manager.css">
 
@@ -18,81 +20,101 @@
   <section class="section">
     <div class="container">
       <div class="columns is-6 is-variable" id="vue-app">
+        <!-- Current Tabs -->
         <div class="column">
-          <div>
+            <!-- Header -->
             <div class="actions">
-              <h1 class="title is-4 primary-color">
-                Current Tabs ({{ currentItems.length }})
-              </h1>
-              <ul>
-                <li>
-                  <p class="medium-font has-text-weight-light clickable">
-                    Save
-                  </p>
-                </li>
-              </ul>
-            </div>
-            <hr>
-            <ul id="current-list" v-if="currentItems.length != 0">
-              <li
-                is="current-list"
-                v-for="item in currentItems"
-                v-bind:favicon="item.favicon"
-                v-bind:title="item.title"
-                v-bind:url="item.url"
-              ></li>
+            <h1 class="title is-4 primary-color">
+              Current Tabs ({{ currentItems.length }})
+            </h1>
+            <ul>
+              <li>
+                <p class="medium-font has-text-weight-light clickable">
+                  Save
+                </p>
+              </li>
             </ul>
-            <p
-              class="medium-font"
-              v-if="currentItems.length == 0"
-            >Nothing to see here</p>
           </div>
+          <hr>
+          <!-- Content -->
+          <ul id="current-list" v-if="currentItems.length != 0">
+            <li
+              is="current-list"
+              v-for="item in currentItems"
+              v-bind:favicon="item.favicon"
+              v-bind:title="item.title"
+              v-bind:url="item.url"
+            ></li>
+          </ul>
+          <p
+            class="medium-font"
+            v-if="currentItems.length == 0"
+          >Nothing here</p>
         </div>
+        <!-- Saved Sessions -->
         <div class="column">
-            <div class="actions">
-              <h1 class="title is-4 primary-color" >
-                Saved Sessions ({{ savedItems.length }})
-              </h1>
-              <ul>
-                <li>
-                  <p class="medium-font has-text-weight-light clickable">
-                    Edit
-                  </p>
-                </li>
-                <li>
-                  <p class="medium-font has-text-weight-light clickable">
-                    Clear
-                  </p>
-                </li>
-              </ul>
-            </div>
-            <hr>
-            <ul id="saved-list">
-              <li
-                is="saved-list"
-                v-for="item in savedItems"
-                v-bind:name="item.name"
-                v-bind:count="item.count"
-                v-bind:date="item.date"
-                v-bind:time="item.time"
-              ></li>
+          <!-- Header -->
+          <div class="actions">
+            <h1 class="title is-4 primary-color" >
+              Saved Sessions ({{ savedItems.length }})
+            </h1>
+            <ul>
+              <li>
+                <p
+                  class="medium-font has-text-weight-light clickable"
+                  v-on:click="startRemovingSavedItems"
+                >Remove</p>
+              </li>
+              <li>
+                <p
+                  class="medium-font has-text-weight-light clickable"
+                  v-on:click="clearSavedItems"
+                >Clear</p>
+              </li>
             </ul>
+          </div>
+          <hr>
+          <!-- Content -->
+          <ul id="saved-list">
+            <li
+              is="saved-list"
+              v-for="(item, index) in savedItems"
+              v-bind:name="item.name"
+              v-bind:count="item.count"
+              v-bind:date="item.date"
+              v-bind:time="item.time"
+              v-bind:remove="item.remove"
+              v-on:remove-item="removeSavedItem(index)"
+            ></li>
+          </ul>
+          <p
+            class="medium-font"
+            v-if="savedItems.length == 0"
+          >Nothing here</p>
         </div>
+        <!-- Settings -->
         <div class="column is-one-quarter">
-          <div>
-            <div class="actions">
-              <h1 class="title is-4 primary-color">Settings</h1>
-              <ul>
-                <li>
-                  <p
-                    class="medium-font has-text-weight-light clickable"
-                    v-on:click="greet"
-                  >About</p>
-                </li>
-              </ul>
+          <!-- Header -->
+          <div class="actions">
+            <h1 class="title is-4 primary-color">Settings</h1>
+            <ul>
+              <li>
+                <p
+                  class="medium-font has-text-weight-light clickable"
+                  v-on:click="greet"
+                >About</p>
+              </li>
+            </ul>
+          </div>
+          <hr>
+          <!-- Content -->
+          <p class="medium-font has-text-weight-light">Coming soon</p>
+          <div class="modal s-active">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              Hello World
             </div>
-            <hr>
-            <p class="medium-font has-text-weight-light">Coming soon</p>
+            <button class="modal-close is-large" aria-label="close"></button>
           </div>
         </div>
       </div>

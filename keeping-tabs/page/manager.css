@@ -38,7 +38,7 @@ span {
 .actions li {
   display: inline-block;
   margin-bottom: 0;
-  margin-right: 8px;
+  margin-right: 10px;
 }
 .actions li:last-child {
   margin-right: 0;
@@ -96,4 +96,28 @@ a:hover {
 .names {
   margin-bottom: 3px;
   font-weight: bold;
+}
+
+#saved-list > li {
+  position: relative;
+}
+
+.sessions, .icons {
+  display: inline-block;
+}
+
+.icons{
+  position: absolute;
+  top: 3px;
+  right: 0;
+  height: 100%;
+  text-align: right;
+  color: #c91111;
+  font-size: 1.05rem;
+}
+.icons:hover {
+  color: #ff0808;
+}
+.icons:active {
+  color: #fbfbfb;
 }

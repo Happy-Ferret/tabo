@@ -1,3 +1,4 @@
+// Curent Tabs
 Vue.component("current-list", {
   template: `
     <li>
@@ -20,32 +21,40 @@ Vue.component("current-list", {
   props: ["favicon", "title", "url"]
 });
 
+// Saved Sessions
 Vue.component("saved-list", {
   template: `
     <li>
-      <p class="names medium-font has-text-weight-semibold clickable">
-        {{ name }}
-      </p>
-      <p class="small-font has-text-weight-light secondary-color">
-        <span class="primary-color clickable">
-          {{ count }} tabs
-        </span>
-        @ {{ date }} {{ time }}
-      </p>
+      <div class="sessions">
+        <p class="names medium-font has-text-weight-semibold clickable">
+          {{ name }}
+        </p>
+        <p class="small-font has-text-weight-light secondary-color">
+          <span class="primary-color clickable">
+            {{ count }} tabs
+          </span>
+          @ {{ date }} {{ time }}
+        </p>
+      </div>
+      <i
+        v-if="remove"
+        v-on:click="$emit('remove-item')"
+        class="icon ion-close-circled icons clickable"></i>
     </li>
   `,
-  props: ["date", "count", "time", "name"]
+  props: ["name", "count", "date", "time", "remove"]
 });
 
+// Application
 new Vue({
   el: "#vue-app",
   data: function() {
     return {
       currentItems: [],
       savedItems: [
-        {date: "2018/04/02", time: "10:57 AM", name: "Apple Pie", count: "2"},
-        {date: "2018/04/02", time: "10:57 AM", name: "Apple Pie", count: "2"},
-      ]
+        {date: "2018/04/02", time: "10:57:34", name: "Apple Pie", count: "2", remove: false},
+        {date: "2018/04/02", time: "10:57:34", name: "Apple Pie", count: "4", remove: false},
+      ],
     };
   },
   created: function() {
@@ -59,6 +68,9 @@ new Vue({
     });
   },
   methods: {
+
+    /* Current Tabs */
+
     updateCurrentItems() {
       var vue = this;
       browser.tabs.query({
@@ -76,8 +88,26 @@ new Vue({
         vue.currentItems = tabList;
       });
     },
+
+    /* Saved Sessions */
+
+    startRemovingSavedItems() {
+      this.savedItems.forEach(item => item.remove = true);
+    },
+
+    removeSavedItem(index) {
+      this.savedItems.splice(index, 1);
+    },
+
+    clearSavedItems() {
+      this.savedItems = [];
+    },
+
+    /* Settings */
+
     greet() {
       alert("Hello!");
     }
+
   }
 });
