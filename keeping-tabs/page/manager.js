@@ -31,7 +31,7 @@ Vue.component("saved-list", {
         </p>
         <p class="small-font has-text-weight-light secondary-color">
           <span class="primary-color clickable">
-            {{ count }} tabs
+            {{ count | pluralize }}
           </span>
           @ {{ date }} {{ time }}
         </p>
@@ -43,7 +43,16 @@ Vue.component("saved-list", {
       >x</p>
     </li>
   `,
-  props: ["name", "count", "date", "time", "remove"]
+  props: ["name", "count", "date", "time", "remove"],
+  filters: {
+    pluralize: function(value) {
+      var noun = "tab";
+      if (value > 1) {
+        noun += "s";
+      }
+      return `${value} ${noun}`;
+    }
+  },
 });
 
 // Application
@@ -74,7 +83,7 @@ new Vue({
           date: "2018/04/02",
           time: "10:57:34",
           name: "Orange",
-          count: "4",
+          count: "1",
           remove: false
         },
       ]
