@@ -61,6 +61,7 @@ new Vue({
       currentItems: [],
 
       /* Saved Sessions */
+
       savedItems: [
         {
           date: "2018/04/02",
@@ -76,9 +77,7 @@ new Vue({
           count: "4",
           remove: false
         },
-      ],
-      savedActions: ["Remove", "Clear"],
-
+      ]
 
     };
   },
@@ -101,14 +100,26 @@ new Vue({
 
     /* Current Tabs */
 
-    // Toggle save button
+    // Toggle save action
     currentActionClasses: function() {
       var classes = this.actionClasses.join(" ");
       if (this.currentItems.length == 0) {
         classes += " disabled";
       }
       return classes;
+    },
+
+    /* Saved Sessions */
+
+    // Toggle remove and clear actions
+    savedActionClasses: function() {
+      var classes = this.actionClasses.join(" ");
+      if (this.savedItems.length == 0) {
+        classes += " disabled";
+      }
+      return classes;
     }
+
   },
   methods: {
 
@@ -135,8 +146,17 @@ new Vue({
 
     /* Saved Sessions */
 
+    // Handler function for remove action
+    removeActionHandler() {
+      this.toggleRemoveButtons();
+      if (!this.savedActionClasses.endsWith("disabled")) {
+        var action = document.getElementById("remove-action");
+        action.classList.toggle("active");
+      }
+    },
+
     // Toggle showing remove buttons
-    toggleRemoveButton() {
+    toggleRemoveButtons() {
       this.savedItems.forEach(item => item.remove = !item.remove);
     },
 
@@ -148,12 +168,6 @@ new Vue({
     // Remove all sessions
     clearSavedItems() {
       this.savedItems = [];
-    },
-
-    /* Settings */
-
-    greet() {
-      alert("Hello!");
     }
 
   }

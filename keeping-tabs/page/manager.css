@@ -77,6 +77,10 @@ span {
   text-decoration: none;
 }
 
+.active {
+  text-decoration: underline;
+}
+
 /* Current Tabs */
 
 #current-list {

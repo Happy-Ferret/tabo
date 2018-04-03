@@ -18,7 +18,9 @@
   <section class="section">
     <div class="container">
       <div class="columns is-6 is-variable" id="vue-app">
+
         <!-- Current Tabs -->
+
         <div class="column">
             <!-- Header -->
             <div class="actions">
@@ -49,7 +51,9 @@
             v-if="currentItems.length == 0"
           >Nothing here</p>
         </div>
+
         <!-- Saved Sessions -->
+
         <div class="column">
           <!-- Header -->
           <div class="actions">
@@ -59,15 +63,16 @@
             <ul>
               <li>
                 <p
-                  class="medium-font has-text-weight-normal clickable"
-                  @click="toggleRemoveButton()"
-                  >{{ savedActions[0] }}</p>
+                  :class="savedActionClasses"
+                  @click="removeActionHandler()"
+                  id="remove-action"
+                  >Remove</p>
               </li>
               <li>
                 <p
-                  class="medium-font has-text-weight-normal clickable"
+                  :class="savedActionClasses"
                   @click="clearSavedItems()"
-                  >{{ savedActions[1] }}</p>
+                  >Clear</p>
               </li>
             </ul>
           </div>
@@ -90,17 +95,18 @@
             v-if="savedItems.length == 0"
           >Nothing here</p>
         </div>
+
         <!-- Settings -->
+
         <div class="column is-one-quarter">
           <!-- Header -->
           <div class="actions">
             <h1 class="title is-4 primary-color">Settings</h1>
             <ul>
               <li>
-                <p
-                  class="medium-font has-text-weight-normal clickable"
-                  @click="greet()"
-                >About</p>
+                <p class="medium-font has-text-weight-normal clickable">
+                  About
+                </p>
               </li>
             </ul>
           </div>
