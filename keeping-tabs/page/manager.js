@@ -73,12 +73,24 @@ new Vue({
   },
   created: function() {
     var vue = this;
+    // Reactive current tabs
     vue.updateCurrentItems();
     browser.tabs.onUpdated.addListener(function() {
       vue.updateCurrentItems();
     });
     browser.tabs.onRemoved.addListener(function() {
       setTimeout(vue.updateCurrentItems, 500);
+    });
+    // Global hotkeys
+    window.addEventListener("keydown", function(event) {
+      // Space
+      if (event.keyCode == 32) {
+        vue.handleSaveAction();
+      } else if (event.keyCode == 16) {
+        vue.handleRemoveAction();
+      } else if (event.keyCode == 8) {
+        vue.clearSavedItems();
+      }
     });
   },
   computed: {
@@ -131,9 +143,11 @@ new Vue({
 
     // Handler function for save action
     handleSaveAction() {
-      element.removeAction.classList.remove("active");
-      this.savedItems.forEach(item => item.remove = false);
-      this.showSaveCard();
+      if (this.currentItems.length >= 1) {
+        element.removeAction.classList.remove("active");
+        this.savedItems.forEach(item => item.remove = false);
+        this.showSaveCard();
+      }
     },
 
     // Handler function for input card submit
@@ -161,8 +175,7 @@ new Vue({
 
     // Save tabs as session
     saveCurrentItems(sessionName) {
-      var vue = this;
-      var items = vue.currentItems;
+      var items = this.currentItems;
       if (items.length >= 1) {
         var session = {
           date: helper.getDateNow(),
@@ -171,7 +184,7 @@ new Vue({
           count: items.length,
           remove: false
         };
-        vue.savedItems.unshift(session);
+        this.savedItems.unshift(session);
       }
     },
 
