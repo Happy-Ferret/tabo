@@ -27,7 +27,7 @@
             </h1>
             <ul>
               <li>
-                <p class="medium-font has-text-weight-light clickable">
+                <p :class="currentActionClasses">
                   Save
                 </p>
               </li>
@@ -39,9 +39,9 @@
             <li
               is="current-list"
               v-for="item in currentItems"
-              v-bind:favicon="item.favicon"
-              v-bind:title="item.title"
-              v-bind:url="item.url"
+              :favicon="item.favicon"
+              :title="item.title"
+              :url="item.url"
             ></li>
           </ul>
           <p
@@ -59,15 +59,15 @@
             <ul>
               <li>
                 <p
-                  class="medium-font has-text-weight-light clickable"
-                  v-on:click="startRemovingSavedItems"
-                >Remove</p>
+                  class="medium-font has-text-weight-normal clickable"
+                  @click="toggleRemoveButton()"
+                  >{{ savedActions[0] }}</p>
               </li>
               <li>
                 <p
-                  class="medium-font has-text-weight-light clickable"
-                  v-on:click="clearSavedItems"
-                >Clear</p>
+                  class="medium-font has-text-weight-normal clickable"
+                  @click="clearSavedItems()"
+                  >{{ savedActions[1] }}</p>
               </li>
             </ul>
           </div>
@@ -77,12 +77,12 @@
             <li
               is="saved-list"
               v-for="(item, index) in savedItems"
-              v-bind:name="item.name"
-              v-bind:count="item.count"
-              v-bind:date="item.date"
-              v-bind:time="item.time"
-              v-bind:remove="item.remove"
-              v-on:remove-item="removeSavedItem(index)"
+              :name="item.name"
+              :count="item.count"
+              :date="item.date"
+              :time="item.time"
+              :remove="item.remove"
+              @remove-item="removeSavedItem(index)"
             ></li>
           </ul>
           <p
@@ -98,22 +98,22 @@
             <ul>
               <li>
                 <p
-                  class="medium-font has-text-weight-light clickable"
-                  v-on:click="greet"
+                  class="medium-font has-text-weight-normal clickable"
+                  @click="greet()"
                 >About</p>
               </li>
             </ul>
           </div>
           <hr>
           <!-- Content -->
-          <p class="medium-font has-text-weight-light">Coming soon</p>
-          <div class="modal s-active">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-              Hello World
-            </div>
-            <button class="modal-close is-large" aria-label="close"></button>
-          </div>
+          <p class="medium-font has-text-weight-normal">Coming soon</p>
+          <!-- <div class="modal s-active"> -->
+          <!--   <div class="modal-background"></div> -->
+          <!--   <div class="modal-content"> -->
+          <!--     Hello World -->
+          <!--   </div> -->
+          <!--   <button class="modal-close is-large" aria-label="close"></button> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
   height: 100vh;
   background: #2d2d2d;
   padding-top: 35px;
-  color: #fbfbfb;
+  color: #f1f1f1;
 }
 
 h1 {
@@ -52,7 +52,7 @@ span {
 }
 
 .primary-color {
-  color: #fbfbfb;
+  color: #f1f1f1;
 }
 .secondary-color {
   color: #8f8f8f;
@@ -66,6 +66,14 @@ span {
 }
 .clickable:active {
   color: #8f8f8f;
+  text-decoration: none;
+}
+
+.disabled {
+  color: #8f8f8f;
+  cursor: default;
+}
+.disabled:hover {
   text-decoration: none;
 }
 
@@ -84,7 +92,7 @@ a {
   display: inherit;
 }
 a:hover {
-  color: #fbfbfb;
+  color: #f1f1f1;
 }
 
 .media-content {
@@ -111,6 +119,7 @@ a:hover {
   cursor: pointer;
   line-height: 1;
   -moz-transform: scale(1, 0.9);
+  color: #f2776e;
 }
 .removes:hover {
   color: red;

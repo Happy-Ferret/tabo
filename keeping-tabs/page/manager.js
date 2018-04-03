@@ -12,7 +12,7 @@ Vue.component("current-list", {
           <a
             :href=url
             target="_blank"
-            class="medium-font has-text-weight-light primary-color clickable"
+            class="medium-font has-text-weight-normal primary-color clickable"
           >{{ title }}</a>
         </div>
       </article>
@@ -26,7 +26,7 @@ Vue.component("saved-list", {
   template: `
     <li>
       <div class="sessions">
-        <p class="names medium-font has-text-weight-semibold clickable">
+        <p class="names medium-font has-text-weight-normal clickable">
           {{ name }}
         </p>
         <p class="small-font has-text-weight-light secondary-color">
@@ -38,7 +38,7 @@ Vue.component("saved-list", {
       </div>
       <p
         v-if="remove"
-        v-on:click="$emit('remove-item')"
+        @click="$emit('remove-item')"
         class="removes medium-font primary-color has-text-weight-light"
       >x</p>
     </li>
@@ -51,15 +51,43 @@ new Vue({
   el: "#vue-app",
   data: function() {
     return {
+
+      /* General */
+
+      actionClasses: ["medium-font", "has-text-weight-normal", "clickable"],
+
+      /* Current Tabs */
+
       currentItems: [],
+
+      /* Saved Sessions */
       savedItems: [
-        {date: "2018/04/02", time: "10:57:34", name: "Apple Pie", count: "2", remove: false},
-        {date: "2018/04/02", time: "10:57:34", name: "Apple Pie qwleqwle jlkqwe lwqkhel qwjkl eqjwlk ejqwlk ejwq wqlekjlkjlk qwe jqkwelqwje lkw", count: "4", remove: false},
+        {
+          date: "2018/04/02",
+          time: "10:57:34",
+          name: "Apple Pie",
+          count: "2",
+          remove: false
+        },
+        {
+          date: "2018/04/02",
+          time: "10:57:34",
+          name: "Orange",
+          count: "4",
+          remove: false
+        },
       ],
+      savedActions: ["Remove", "Clear"],
+
+
     };
   },
   created: function() {
+
     var vue = this;
+
+    /* Current Tabs */
+
     vue.updateCurrentItems();
     browser.tabs.onUpdated.addListener(function() {
       vue.updateCurrentItems();
@@ -67,11 +95,26 @@ new Vue({
     browser.tabs.onRemoved.addListener(function() {
       setTimeout(vue.updateCurrentItems, 500);
     });
+
+  },
+  computed: {
+
+    /* Current Tabs */
+
+    // Toggle save button
+    currentActionClasses: function() {
+      var classes = this.actionClasses.join(" ");
+      if (this.currentItems.length == 0) {
+        classes += " disabled";
+      }
+      return classes;
+    }
   },
   methods: {
 
     /* Current Tabs */
 
+    // Refresh tabs
     updateCurrentItems() {
       var vue = this;
       browser.tabs.query({
@@ -92,14 +135,17 @@ new Vue({
 
     /* Saved Sessions */
 
-    startRemovingSavedItems() {
-      this.savedItems.forEach(item => item.remove = true);
+    // Toggle showing remove buttons
+    toggleRemoveButton() {
+      this.savedItems.forEach(item => item.remove = !item.remove);
     },
 
+    // Remove session
     removeSavedItem(index) {
       this.savedItems.splice(index, 1);
     },
 
+    // Remove all sessions
     clearSavedItems() {
       this.savedItems = [];
     },
