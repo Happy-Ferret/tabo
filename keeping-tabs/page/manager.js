@@ -64,7 +64,6 @@ new Vue({
       /* Current Tabs */
 
       currentItems: [],
-      text: "",
 
       /* Saved Sessions */
 
@@ -130,18 +129,11 @@ new Vue({
       });
     },
 
-    // Show input card for saving tabs
-    showSaveCard() {
-      element.saveAction.classList.add("active");
-      element.saveCard.classList.add("is-active");
-      element.saveInput.focus();
-      element.saveInput.value = "";
-    },
-
-    // Hide input card for saving tabs
-    hideSaveCard() {
-      element.saveAction.classList.remove("active");
-      element.saveCard.classList.remove("is-active");
+    // Handler function for save action
+    handleSaveAction() {
+      element.removeAction.classList.remove("active");
+      this.savedItems.forEach(item => item.remove = false);
+      this.showSaveCard();
     },
 
     // Handler function for input card submit
@@ -151,6 +143,20 @@ new Vue({
         this.saveCurrentItems(name);
         this.hideSaveCard();
       }
+    },
+
+    // Show input card for saving tabs
+    showSaveCard() {
+      element.saveAction.classList.add("active");
+      element.saveCard.classList.add("is-active");
+      element.saveInput.value = "";
+      element.saveInput.focus();
+    },
+
+    // Hide input card for saving tabs
+    hideSaveCard() {
+      element.saveAction.classList.remove("active");
+      element.saveCard.classList.remove("is-active");
     },
 
     // Save tabs as session

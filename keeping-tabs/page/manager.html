@@ -31,7 +31,7 @@
               <li>
                 <p
                   :class="currentActionClasses"
-                  @click="showSaveCard()"
+                  @click="handleSaveAction()"
                   id="save-action"
                 >Save</p>
               </li>
@@ -62,7 +62,6 @@
                 <div class="field">
                   <div class="control">
                     <input
-                      v-model="text"
                       ref="nameInput"
                       @keyup.enter="handleSaveCardSubmit()"
                       @keyup.esc="hideSaveCard()"
