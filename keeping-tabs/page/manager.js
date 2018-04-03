@@ -67,22 +67,7 @@ new Vue({
 
       /* Saved Sessions */
 
-      savedItems: [
-        {
-          date: "2018/04/02",
-          time: "10:57:34",
-          name: "Apple Pie",
-          count: "2",
-          remove: false
-        },
-        {
-          date: "2018/04/02",
-          time: "10:57:34",
-          name: "Orange",
-          count: "1",
-          remove: false
-        },
-      ]
+      savedItems: []
 
     };
   },
@@ -149,6 +134,22 @@ new Vue({
       });
     },
 
+    // Save tabs
+    saveCurrentItems() {
+      var vue = this;
+      var items = vue.currentItems;
+      if (items.length >= 1) {
+        var session = {
+          date: helper.getDateNow(),
+          time: helper.getTimeNow(),
+          name: "Test",
+          count: items.length,
+          remove: false
+        };
+        vue.savedItems.unshift(session);
+      }
+    },
+
     /* Saved Sessions */
 
     // Handler function for remove action
@@ -177,3 +178,32 @@ new Vue({
 
   }
 });
+
+// Helper functions
+var helper = {
+  getDateNow: function() {
+    var today = new Date();
+    var date = [
+      today.getFullYear(),
+      today.getMinutes(),
+      today.getSeconds()
+    ].map(formatDigit);
+    return date.join("/");
+  },
+  getTimeNow: function() {
+    var today = new Date();
+    var time = [
+      today.getHours(),
+      today.getMinutes(),
+      today.getSeconds()
+    ].map(formatDigit);
+    return time.join(":");
+  }
+};
+
+function formatDigit(number) {
+  if (number < 10) {
+    number = "0" + number;
+  }
+  return number;
+}

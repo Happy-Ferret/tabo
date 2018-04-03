@@ -29,9 +29,10 @@
             </h1>
             <ul>
               <li>
-                <p :class="currentActionClasses">
-                  Save
-                </p>
+                <p
+                  :class="currentActionClasses"
+                  @click="saveCurrentItems()"
+                >Save</p>
               </li>
             </ul>
           </div>
@@ -49,7 +50,7 @@
           <p
             class="medium-font"
             v-if="currentItems.length == 0"
-          >Nothing here</p>
+          >Nothing here. Try opening a few tabs.</p>
         </div>
 
         <!-- Saved Sessions -->
@@ -93,7 +94,7 @@
           <p
             class="medium-font"
             v-if="savedItems.length == 0"
-          >Nothing here</p>
+          >Nothing here. Try saving from Current Tabs.</p>
         </div>
 
         <!-- Settings -->

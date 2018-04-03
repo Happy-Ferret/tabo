@@ -60,6 +60,7 @@ span {
 
 .clickable {
   cursor: pointer;
+  -moz-user-select: none;
 }
 .clickable:hover {
   text-decoration: underline;
