@@ -5,7 +5,7 @@ body {
 }
 
 .section {
-  height: 100vh;
+  min-height: 100vh;
   background-color: #2d2d2d;
   padding-top: 35px;
   color: #f1f1f1;
@@ -85,12 +85,11 @@ span {
   text-decoration: underline;
 }
 
-/* Current Tabs */
-
-#current-list {
-  max-height: 80vh;
-  overflow: scroll;
+.hide {
+  display: none !important;
 }
+
+/* Current Tabs */
 
 .currentTabs {
   display: flex;
@@ -158,6 +157,7 @@ a:hover {
 
 #saved-list > li {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
 }
@@ -173,4 +173,8 @@ a:hover {
 }
 .removes:hover {
   color: #e62214;
+}
+
+.session-tab-lists {
+  flex-basis: 100%;
 }

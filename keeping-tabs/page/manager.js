@@ -1,4 +1,4 @@
-// Tab list
+// Components
 Vue.component("tab-list", {
   template: `
     <li>
@@ -16,8 +16,6 @@ Vue.component("tab-list", {
   `,
   props: ["favicon", "title", "url"]
 });
-
-// Session list
 Vue.component("session-list", {
   template: `
     <li>
@@ -27,9 +25,10 @@ Vue.component("session-list", {
           class="names medium-font has-text-weight-normal clickable"
         >{{ name }}</p>
         <p class="small-font has-text-weight-light secondary-color">
-          <span class="primary-color clickable">
-            {{ count | pluralize }}
-          </span>
+          <span
+            @click="$emit('toggle-tabs')"
+            class="tab-toggles primary-color clickable"
+          >{{ count | pluralize }}</span>
           @ {{ date }} {{ time }}
         </p>
       </div>
@@ -38,6 +37,18 @@ Vue.component("session-list", {
         @click="$emit('remove-item')"
         class="removes medium-font primary-color has-text-weight-normal"
       >x</p>
+      <div class="session-tab-lists hide">
+        <hr>
+        <ul>
+          <li
+            is="tab-list"
+            v-for="item in tabs"
+            :favicon="item.favicon"
+            :title="item.title"
+            :url="item.url"
+          ></li>
+        </ul>
+      </div>
     </li>
   `,
   props: ["name", "tabs", "date", "time", "remove"],
@@ -62,19 +73,9 @@ new Vue({
   el: "#vue-app",
   data: function() {
     return {
-
-      /* General */
-
       actionClasses: ["medium-font", "has-text-weight-normal", "clickable"],
-
-      /* Current Tabs */
-
       currentItems: [],
-
-      /* Saved Sessions */
-
       savedItems: []
-
     };
   },
   created: function() {
@@ -89,21 +90,18 @@ new Vue({
     });
     // Global hotkeys
     window.addEventListener("keydown", function(event) {
-      // Space
-      if (event.keyCode == 32) {
-        if (!element.saveAction.classList.contains("active")) {
+      if (!element.saveAction.classList.contains("active")) {
+        // Space
+        if (event.keyCode == 32) {
           vue.handleSaveAction();
+        // Shift
+        } else if (event.keyCode == 16) {
+          vue.handleRemoveAction();
         }
-      // Shift
-      } else if (event.keyCode == 16) {
-        vue.handleRemoveAction();
       }
     });
   },
   computed: {
-
-    /* Current Tabs */
-
     // Toggle save action
     currentActionClasses: function() {
       var classes = this.actionClasses.join(" ");
@@ -112,9 +110,6 @@ new Vue({
       }
       return classes;
     },
-
-    /* Saved Sessions */
-
     // Toggle remove and clear actions
     savedActionClasses: function() {
       var classes = this.actionClasses.join(" ");
@@ -123,7 +118,6 @@ new Vue({
       }
       return classes;
     }
-
   },
   methods: {
 
@@ -150,7 +144,7 @@ new Vue({
 
     // Handler function for save action
     handleSaveAction() {
-      if (this.currentItems.length >= 1) {
+      if (!element.saveAction.classList.contains("disabled")) {
         element.removeAction.classList.remove("active");
         this.savedItems.forEach(item => item.remove = false);
         this.showSaveCard();
@@ -199,9 +193,9 @@ new Vue({
 
     // Handler function for remove action
     handleRemoveAction() {
-      this.toggleRemoveButtons();
-      if (!this.savedActionClasses.endsWith("disabled")) {
+      if (!element.removeAction.classList.contains("disabled")) {
         element.removeAction.classList.toggle("active");
+        this.toggleRemoveButtons();
       }
     },
 
@@ -215,6 +209,13 @@ new Vue({
       this.savedItems.splice(index, 1);
     },
 
+    // Handler function for clear action
+    handleClearAction() {
+      if (!element.removeAction.classList.contains("disabled")) {
+        this.clearSavedItems();
+      }
+    },
+
     // Remove all sessions
     clearSavedItems() {
       this.savedItems = [];
@@ -226,6 +227,38 @@ new Vue({
       browser.windows.create({
         url: urls
       });
+    },
+
+    // Handler function for tabs toggle for session
+    handleSavedItemTabs(index) {
+      var sessionItems = element.savedList.childNodes;
+      var item;
+      for (var i = 0; i < sessionItems.length; i++) {
+        if (i == index) {
+          item = sessionItems[i];
+        } else {
+          sessionItems[i].classList.toggle("hide");
+        }
+      }
+      var tabToggle = item.getElementsByClassName("tab-toggles")[0];
+      var tabList = item.getElementsByClassName("session-tab-lists")[0];
+      if (element.removeAction.classList.contains("active")) {
+        element.removeAction.classList.remove("active");
+        this.toggleRemoveButtons();
+      }
+      if (tabList.classList.contains("hide")) {
+        element.saveAction.classList.add("disabled");
+        element.removeAction.classList.add("disabled");
+        element.clearAction.classList.add("disabled");
+      } else {
+        if (this.currentItems.length >= 1) {
+          element.saveAction.classList.remove("disabled");
+        }
+        element.removeAction.classList.remove("disabled");
+        element.clearAction.classList.remove("disabled");
+      }
+      tabToggle.classList.toggle("active");
+      tabList.classList.toggle("hide");
     }
 
   }
@@ -236,7 +269,9 @@ var element = {
   saveAction: document.getElementById("save-action"),
   saveCard: document.getElementById("save-card"),
   saveInput: document.getElementById("name-input"),
-  removeAction: document.getElementById("remove-action")
+  savedList: document.getElementById("saved-list"),
+  removeAction: document.getElementById("remove-action"),
+  clearAction: document.getElementById("clear-action")
 };
 
 // Helper functions

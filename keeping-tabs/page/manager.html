@@ -97,7 +97,8 @@
               <li>
                 <p
                   :class="savedActionClasses"
-                  @click="clearSavedItems()"
+                  @click="handleClearAction()"
+                  id="clear-action"
                   >Clear</p>
               </li>
             </ul>
@@ -115,6 +116,7 @@
               :remove="item.remove"
               @open-item="openSavedItem(index)"
               @remove-item="removeSavedItem(index)"
+              @toggle-tabs="handleSavedItemTabs(index)"
             ></li>
           </ul>
           <p
