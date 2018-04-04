@@ -39,7 +39,7 @@ Vue.component("saved-list", {
       >x</p>
     </li>
   `,
-  props: ["name", "count", "date", "time", "remove"],
+  props: ["name", "tabs", "date", "time", "remove"],
   filters: {
     pluralize: function(value) {
       var noun = "tab";
@@ -49,6 +49,11 @@ Vue.component("saved-list", {
       return `${value} ${noun}`;
     }
   },
+  computed: {
+    count: function() {
+      return this.tabs.length;
+    }
+  }
 });
 
 // Application
@@ -181,8 +186,8 @@ new Vue({
         var session = {
           date: helper.getDateNow(),
           time: helper.getTimeNow(),
-          name: sessionName,
-          count: items.length,
+          name: helper.capitalize(sessionName),
+          tabs: items,
           remove: false
         };
         this.savedItems.unshift(session);
@@ -227,6 +232,13 @@ var element = {
 
 // Helper functions
 var helper = {
+  capitalize: function(text) {
+    var words = text.split(" ");
+    words = words.map(function(word) {
+      return word[0].toUpperCase() + word.slice(1);
+    });
+    return words.join(" ");
+  },
   getDateNow: function() {
     var today = new Date();
     var date = [
