@@ -90,6 +90,12 @@ new Vue({
     browser.tabs.onRemoved.addListener(function() {
       setTimeout(vue.updateCurrentItems, 500);
     });
+    // Load saved sessions from storage
+    browser.storage.local.get("sessions").then(function(results) {
+      if (Object.keys(results).length != 0) {
+        vue.savedItems = results.sessions;
+      }
+    });
     // Global hotkeys
     window.addEventListener("keydown", function(event) {
       if (!element.saveAction.classList.contains("active")) {
@@ -99,9 +105,12 @@ new Vue({
         // Shift
         } else if (event.keyCode == 16) {
           vue.handleRemoveAction();
+        // Escape
         } else if (event.keyCode == 27) {
           if (vue.sessionTabsOpen) {
             vue.handleSavedItemTabs(vue.sessionIndex);
+          } else if (element.removeAction.classList.contains("active")) {
+            vue.handleRemoveAction();
           }
         }
       }
@@ -193,6 +202,7 @@ new Vue({
         };
         this.savedItems.unshift(session);
       }
+      helper.storeSessions(this.savedItems);
     },
 
     /* Saved Sessions */
@@ -213,6 +223,7 @@ new Vue({
     // Remove session
     removeSavedItem(index) {
       this.savedItems.splice(index, 1);
+      helper.storeSessions(this.savedItems);
     },
 
     // Handler function for clear action
@@ -225,6 +236,7 @@ new Vue({
     // Remove all sessions
     clearSavedItems() {
       this.savedItems = [];
+      helper.storeSessions(this.savedItems);
     },
 
     // Open session as tabs
@@ -306,7 +318,7 @@ var helper = {
       today.getFullYear(),
       today.getMonth() + 1,
       today.getDate()
-    ].map(formatDigit);
+    ].map(helper.formatDigit);
     return date.join("/");
   },
   getTimeNow: function() {
@@ -315,14 +327,21 @@ var helper = {
       today.getHours(),
       today.getMinutes(),
       today.getSeconds()
-    ].map(formatDigit);
+    ].map(helper.formatDigit);
     return time.join(":");
+  },
+  formatDigit: function(number) {
+    if (number < 10) {
+      number = "0" + number;
+    }
+    return number;
+  },
+  storeSessions: function(sessions) {
+    var items = JSON.parse(JSON.stringify(sessions));
+    items = items.map(function(item) {
+      item.remove = false;
+      return item;
+    });
+    browser.storage.local.set({"sessions": items});
   }
 };
-
-function formatDigit(number) {
-  if (number < 10) {
-    number = "0" + number;
-  }
-  return number;
-}
