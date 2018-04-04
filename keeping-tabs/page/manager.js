@@ -259,6 +259,14 @@ new Vue({
       }
       tabToggle.classList.toggle("active");
       tabList.classList.toggle("hide");
+    },
+
+    /* Settings */
+
+    // Open about page in new tab
+    openAboutPage() {
+      var url = "https://github.com/chunkhang/keeping-tabs";
+      window.open(url, "_blank");
     }
 
   }
