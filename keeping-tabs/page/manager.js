@@ -91,9 +91,6 @@ new Vue({
       // Shift
       } else if (event.keyCode == 16) {
         vue.handleRemoveAction();
-      // Backspace
-      } else if (event.keyCode == 8) {
-        vue.clearSavedItems();
       }
     });
   },
