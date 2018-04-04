@@ -1,5 +1,5 @@
-// Curent Tabs
-Vue.component("current-list", {
+// Tab list
+Vue.component("tab-list", {
   template: `
     <li>
       <div class="currentTabs">
@@ -17,8 +17,8 @@ Vue.component("current-list", {
   props: ["favicon", "title", "url"]
 });
 
-// Saved Sessions
-Vue.component("saved-list", {
+// Session list
+Vue.component("session-list", {
   template: `
     <li>
       <div class="sessions">

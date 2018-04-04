@@ -4,6 +4,9 @@ $ web-ext run --no-reload --source-dir keeping-tabs
 
 To Do
 -----
+- Saved Sesions
+  - List tabs
+  - Local storage
 - About
   - Card
 - Settings

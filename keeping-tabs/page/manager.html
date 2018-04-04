@@ -42,7 +42,7 @@
           <!-- Content -->
           <ul id="current-list" v-if="currentItems.length != 0">
             <li
-              is="current-list"
+              is="tab-list"
               v-for="item in currentItems"
               :favicon="item.favicon"
               :title="item.title"
@@ -106,7 +106,7 @@
           <!-- Content -->
           <ul id="saved-list">
             <li
-              is="saved-list"
+              is="session-list"
               v-for="(item, index) in savedItems"
               :name="item.name"
               :tabs="item.tabs"
