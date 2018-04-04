@@ -4,15 +4,8 @@ $ web-ext run --no-reload --source-dir keeping-tabs
 
 To Do
 -----
-- Saved Sesions
-  - List tabs
-  - Local storage
-- About
-  - Card
 - Settings
   - Remove duplicate tabs
   - Confirmation dialog
   - Capitalize session names
   - Enable hotkeys
-- Icon
-  - Nicer icon

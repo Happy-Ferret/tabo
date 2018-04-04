@@ -75,7 +75,9 @@ new Vue({
     return {
       actionClasses: ["medium-font", "has-text-weight-normal", "clickable"],
       currentItems: [],
-      savedItems: []
+      savedItems: [],
+      sessionTabsOpen: false,
+      sessionIndex: 0
     };
   },
   created: function() {
@@ -97,6 +99,10 @@ new Vue({
         // Shift
         } else if (event.keyCode == 16) {
           vue.handleRemoveAction();
+        } else if (event.keyCode == 27) {
+          if (vue.sessionTabsOpen) {
+            vue.handleSavedItemTabs(vue.sessionIndex);
+          }
         }
       }
     });
@@ -250,12 +256,15 @@ new Vue({
         element.saveAction.classList.add("disabled");
         element.removeAction.classList.add("disabled");
         element.clearAction.classList.add("disabled");
+        this.sessionTabsOpen = true;
+        this.sessionIndex = index;
       } else {
         if (this.currentItems.length >= 1) {
           element.saveAction.classList.remove("disabled");
         }
         element.removeAction.classList.remove("disabled");
         element.clearAction.classList.remove("disabled");
+        this.sessionTabsOpen = false;
       }
       tabToggle.classList.toggle("active");
       tabList.classList.toggle("hide");
