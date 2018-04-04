@@ -1,1 +1,13 @@
-web-ext run --no-reload --source-dir keeping-tabs
+Running Locally
+---------------
+$ web-ext run --no-reload --source-dir keeping-tabs
+
+To Do
+-----
+- Settings
+  - Remove duplicate tabs
+  - Confirmation dialog
+  - Capitalize session names
+  - Enable hotkeys
+- Icon
+  - Nicer icon

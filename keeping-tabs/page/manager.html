@@ -111,6 +111,7 @@
               :date="item.date"
               :time="item.time"
               :remove="item.remove"
+              @open-item="openSavedItem(index)"
               @remove-item="removeSavedItem(index)"
             ></li>
           </ul>

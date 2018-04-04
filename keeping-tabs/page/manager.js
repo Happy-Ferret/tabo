@@ -22,9 +22,10 @@ Vue.component("saved-list", {
   template: `
     <li>
       <div class="sessions">
-        <p class="names medium-font has-text-weight-normal clickable">
-          {{ name }}
-        </p>
+        <p
+          @click="$emit('open-item')"
+          class="names medium-font has-text-weight-normal clickable"
+        >{{ name }}</p>
         <p class="small-font has-text-weight-light secondary-color">
           <span class="primary-color clickable">
             {{ count | pluralize }}
@@ -217,6 +218,14 @@ new Vue({
     // Remove all sessions
     clearSavedItems() {
       this.savedItems = [];
+    },
+
+    // Open session as tabs
+    openSavedItem(index) {
+      var urls = this.savedItems[index].tabs.map(tab => tab.url);
+      browser.windows.create({
+        url: urls
+      });
     }
 
   }
