@@ -286,7 +286,7 @@ new Vue({
 
     // Open about page in new tab
     openAboutPage() {
-      var url = "https://github.com/chunkhang/keeping-tabs";
+      var url = "https://github.com/chunkhang/tabo";
       window.open(url, "_blank");
     }
 

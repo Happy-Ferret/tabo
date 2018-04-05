@@ -1,2 +1,2 @@
-# keeping-tabs
+# Tabo
 A simple tab manager for saving and loading tabs
