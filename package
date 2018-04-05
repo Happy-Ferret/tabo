@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
 sed -i "" "s/vue\.js/vue\.min\.js/g" tabo/page/manager.html
-zip -r ../tabo.zip tabo/ -x "*/vue.js" "*/.*"
+cd tabo
+zip -r ../../tabo.zip * -x "*/vue.js" "*/.*"
+cd ..
 sed -i "" "s/vue\.min\.js/vue\.js/g" tabo/page/manager.html
