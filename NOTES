@@ -2,6 +2,10 @@ Running Locally
 ---------------
 $ web-ext run --no-reload --source-dir tabo
 
+Packaging
+---------
+$ ./package
+
 To Do
 -----
 - Settings
